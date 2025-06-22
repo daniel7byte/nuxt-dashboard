@@ -1,42 +1,34 @@
-<script setup lang="ts">
-const { products, isLoading, error, fetchProducts } = useProducts()
+<script lang="ts" setup>
+const auth = useAuth()
 
-fetchProducts()
+// The computed method is used because we want to reactively check the authentication status
+const isAuthenticated = computed(() => auth.isAuthenticated.value)
 
-// Handle refresh action
-async function refreshProducts() {
-  await fetchProducts()
+if (isAuthenticated.value) {
+  console.log('User is authenticated:', auth.user)
+} else {
+  console.log('User is not authenticated')
 }
+
 </script>
 
 <template>
   <div>
-    <h1 class="text-lg my-5 font-extrabold">
-      Products Lists
-    </h1>
-    <UButton icon="lucide-database-backup" label="Refresh" class="rounded-full" @click="refreshProducts"
-      :loading="isLoading" />
-    <div class="mt-4">
-      <div v-if="isLoading" class="flex justify-center p-4">
-        Loading products...
-      </div>
-      <div v-else-if="error" class="p-4 text-red-500 bg-red-50 rounded">
-        {{ error.message || 'Failed to load products' }}
-      </div>
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-        <UCard v-for="product in products?.products" :key="product.id" class="h-full">
-          <template #header>
-            <h3 class="font-bold text-lg">{{ product.title }}</h3>
-          </template>
-          <p>{{ product.description }}</p>
-          <template #footer>
-            <div class="flex justify-between items-center">
-              <span class="font-bold">${{ product.price }}</span>
-              <UBadge color="green">{{ product.category }}</UBadge>
-            </div>
-          </template>
-        </UCard>
-      </div>
+    <h1 class="text-lg font-extrabold">Welcome to my first NuxtJS Application</h1>
+    <p>In this example, I'm going to implement a Login and a CRUD of Products</p>
+    <div class="flex flex-row mt-5">
+
+      <UButton v-if="!isAuthenticated" icon="lucide:shield-user" class="basis-auto mr-2.5">
+        <NuxtLink to="/login">Login</NuxtLink>
+      </UButton>
+
+      <UButton v-if="isAuthenticated" icon="lucide:log-out" class="basis-auto mr-2.5" @click="auth.logout">
+        Logout
+      </UButton>
+
+      <UButton icon="lucide:shopping-cart" class="basis-auto mr-2.5">
+        <NuxtLink to="/products">Products</NuxtLink>
+      </UButton>
     </div>
   </div>
 </template>

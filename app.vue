@@ -4,7 +4,11 @@
 
 
 <template>
-  <UApp>
+  <UApp
+    :toaster="{
+      position: 'top-right',
+    }"
+  >
     <NuxtLayout>
       <NuxtRouteAnnouncer />
       <NuxtPage />
