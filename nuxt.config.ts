@@ -30,5 +30,12 @@ export default defineNuxtConfig({
 
   pages: true, // To force the pages system
 
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+
+  typescript: {
+    tsConfig: {
+      "compilerOptions": {}
+      // whatever else you need
+    }
+  }
 })
