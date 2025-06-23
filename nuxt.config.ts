@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     'pinia-plugin-persistedstate/nuxt',
   ],
 
-  ssr: false, // Disable server-side rendering
+  // ssr: false, // Disable server-side rendering
   // routeRules: {
   //   '/**': {
   //     // Client-side rendering for all routes
