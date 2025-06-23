@@ -19,14 +19,15 @@ export default defineNuxtConfig({
     'pinia-plugin-persistedstate/nuxt',
   ],
 
-  routeRules: {
-    // '/**': {
-    //   // Client-side rendering for all routes
-    //   ssr: false,
-    //   // Enable prerendering for all routes
-    //   prerender: true
-    // }
-  },
+  ssr: false, // Disable server-side rendering
+  // routeRules: {
+  //   '/**': {
+  //     // Client-side rendering for all routes
+  //     ssr: false,
+  //     //   // Enable prerendering for all routes
+  //     //   prerender: true
+  //   }
+  // },
 
   pages: true, // To force the pages system
 
